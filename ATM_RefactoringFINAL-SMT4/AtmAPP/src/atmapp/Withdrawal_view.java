@@ -10,7 +10,7 @@ package atmapp;
  * @author Ferdy
  */
 public class Withdrawal_view {
-    private Screen screen;
+    private Screen screen = new Screen();
     
     public void IfWithdrawalSuccess(){
             screen.displayMessageLine("Your cash has been dispensed. "

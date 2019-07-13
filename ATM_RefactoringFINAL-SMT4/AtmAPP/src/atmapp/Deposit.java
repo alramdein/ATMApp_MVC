@@ -7,7 +7,7 @@ public class Deposit extends Transaction {
    private final static int CANCELED = 0; // constant for cancel option
    
    //tambahan
-   private Deposit_view depositView;
+   private Deposit_view depositView = new Deposit_view();
 
    // Deposit constructor
    public Deposit(int userAccountNumber, Screen atmScreen, 

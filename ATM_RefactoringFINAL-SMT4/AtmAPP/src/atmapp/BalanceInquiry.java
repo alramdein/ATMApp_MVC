@@ -8,7 +8,7 @@ public class BalanceInquiry extends Transaction {
    } 
    
    //tambahan
-   private BalanceInquiry_view balanceinquiryView;
+   private BalanceInquiry_view balanceinquiryView = new BalanceInquiry_view();
 
    // performs the transaction
    @Override

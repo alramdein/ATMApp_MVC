@@ -12,7 +12,7 @@ public class Withdrawal extends Transaction {
    private final static int CANCELED = 6;
    
    //tambahan
-   private Withdrawal_view withdrawalView;
+   private Withdrawal_view withdrawalView = new Withdrawal_view();
 
    // Withdrawal constructor
    public Withdrawal(int userAccountNumber, Screen atmScreen, 

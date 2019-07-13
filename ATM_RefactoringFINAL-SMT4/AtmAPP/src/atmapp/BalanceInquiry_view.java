@@ -10,7 +10,7 @@ package atmapp;
  * @author Ferdy
  */
 public class BalanceInquiry_view {
-    private Screen screen;
+    private Screen screen = new Screen();
     
     public void DisplayBalanceInformation(double availableBalance, double totalBalance){
         screen.displayMessageLine("\nBalance Information:");
