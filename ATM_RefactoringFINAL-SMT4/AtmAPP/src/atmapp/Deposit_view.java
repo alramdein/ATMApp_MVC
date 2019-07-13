@@ -10,7 +10,7 @@ package atmapp;
  * @author USER
  */
 public class Deposit_view {
-    private Screen screen; 
+    private Screen screen = new Screen(); 
     
     public void PrintInsertDeposit (double amount) {
          screen.displayMessage("Please insert a deposit "

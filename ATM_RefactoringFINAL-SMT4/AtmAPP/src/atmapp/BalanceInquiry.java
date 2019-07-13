@@ -6,6 +6,9 @@ public class BalanceInquiry extends Transaction {
       BankDatabase atmBankDatabase) {
       super(userAccountNumber, atmScreen, atmBankDatabase);
    } 
+   
+   //tambahan
+   private BalanceInquiry_view balanceinquiryView;
 
    // performs the transaction
    @Override
@@ -22,11 +25,6 @@ public class BalanceInquiry extends Transaction {
          bankDatabase.getTotalBalance(getAccountNumber());
       
       // display the balance information on the screen
-      screen.displayMessageLine("\nBalance Information:");
-      screen.displayMessage(" - Available balance: "); 
-      screen.displayDollarAmount(availableBalance);
-      screen.displayMessage("\n - Total balance:     ");
-      screen.displayDollarAmount(totalBalance);
-      screen.displayMessageLine("");
+      balanceinquiryView.DisplayBalanceInformation(availableBalance, totalBalance);
    }
 } 

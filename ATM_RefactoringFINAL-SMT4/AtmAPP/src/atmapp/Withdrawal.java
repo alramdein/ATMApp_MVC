@@ -10,6 +10,9 @@ public class Withdrawal extends Transaction {
 
    // constant corresponding to menu option to cancel
    private final static int CANCELED = 6;
+   
+   //tambahan
+   private Withdrawal_view withdrawalView;
 
    // Withdrawal constructor
    public Withdrawal(int userAccountNumber, Screen atmScreen, 
@@ -30,7 +33,6 @@ public class Withdrawal extends Transaction {
    @Override
    public void execute() {
        double availableBalance;
-       Screen screen = super.getScreen();
        amount = displayMenuOfAmounts();
        if(amount != 0){
             if(cashDispenser.isSufficientCashAvailable(amount)){
@@ -42,26 +44,18 @@ public class Withdrawal extends Transaction {
                     cashDispenser.dispenseCash(amount);
                     atmBankDatabase.getAccount(super.getAccountNumber()).
                             credit(amount);
-                    screen.displayMessageLine("Your cash has been dispensed. "
-                            + "Please take your cash now.");
+                    withdrawalView.IfWithdrawalSuccess();
                 }
                 else {
-                    screen.displayMessageLine("Your balance is not enough "
-                        + "to make a withdrawal");
-                    screen.displayMessage("Balance : ");
-                    screen.displayDollarAmount(availableBalance);
-                    screen.displayMessageLine("");
-                    screen.displayMessage("Amount Withdrawal : ");
-                    screen.displayDollarAmount(amount);
+                    withdrawalView.IfWithdrawalFailed(amount, availableBalance);
                 }
             }
             else {
-                screen.displayMessageLine("Bills is insufficient in "
-                        + "cash dispensers");
+                withdrawalView.IfWithdrawalInsufficient();
             }
        }
        else {
-           screen.displayMessageLine("Canceling transaction...");
+           withdrawalView.IfWithdrawalCancel();
        }
    } 
 
@@ -78,17 +72,10 @@ public class Withdrawal extends Transaction {
       // loop while no valid choice has been made
       while (userChoice == 0) {
          // display the withdrawal menu
-         screen.displayMessageLine("\nWithdrawal Menu:");
-         screen.displayMessageLine("1 - $20");
-         screen.displayMessageLine("2 - $40");
-         screen.displayMessageLine("3 - $60");
-         screen.displayMessageLine("4 - $100");
-         screen.displayMessageLine("5 - $200");
-         screen.displayMessageLine("6 - Cancel transaction");
-         screen.displayMessage("\nChoose a withdrawal amount: ");
+         withdrawalView.WithdrawalMenu();
 
          int input = keypad.getInput(); // get user input through keypad
-
+ 
          // determine how to proceed based on the input value
          switch (input) {
             // if the user chose a withdrawal amount
@@ -115,8 +102,7 @@ public class Withdrawal extends Transaction {
                userChoice = amounts[input - CANCELED]; // save user's choice
                break;
             default: // the user did not enter a value from 1-6
-               screen.displayMessageLine(
-                  "\nInvalid selection. Try again.");
+               withdrawalView.IfInvalidSelection();
          } 
       } 
 
